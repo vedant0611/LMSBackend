@@ -1,0 +1,33 @@
+from fastapi import APIRouter, Depends
+from fastapi.exceptions import HTTPException
+from pydantic import BaseModel
+import modules.member.controllers as member_controller 
+from modules.auth.routes import get_current_user
+
+router = APIRouter()
+
+# For Borrow the books
+@router.post("/book/borrow/{book_id}")
+async def borrow_book(book_id:int, current_user: dict = Depends(get_current_user)):
+    try:
+        current_user_id = current_user.get("user_id")
+        return await member_controller.borrow_book(current_user_id,book_id)
+    except Exception as e:
+        return HTTPException(status_code=500, detail=str(e))
+
+# For Returned the books
+@router.post("/book/return/{book_id}")
+async def return_book(book_id:int, current_user: dict = Depends(get_current_user)):
+    try:
+        return await member_controller.return_book(book_id)
+    except Exception as e:
+        return HTTPException(status_code=500, detail=str(e))
+
+# For Delete my own account
+@router.get("/delete-account")
+async def delete_account(current_user: dict = Depends(get_current_user)):
+    try:
+        current_user_id = current_user.get("user_id")
+        return await member_controller.delete_account(current_user_id)
+    except Exception as e:
+        return HTTPException(status_code=500, detail=str(e))

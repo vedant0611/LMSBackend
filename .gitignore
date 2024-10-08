@@ -1,0 +1,24 @@
+# Ignore environment variables file
+.env
+
+# Ignore virtual environment directory
+venv/
+
+# Ignore other common Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore logs
+*.log
+
+# Ignore local settings or configurations
+*.local
+*.envrc
+
+# Ignore specific files or directories (add more as needed)
+# your_specific_file_or_directory/
