@@ -22,3 +22,4 @@ __pycache__/
 
 # Ignore specific files or directories (add more as needed)
 # your_specific_file_or_directory/
+.vercel
