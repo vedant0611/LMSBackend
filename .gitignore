@@ -20,6 +20,23 @@ __pycache__/
 *.local
 *.envrc
 
+# Ignore MySQL configuration files
+*.sql
+*.db
+*.sqlite
+*.sqlite3
+
+# Ignore any local MySQL config files
+mysql_config.json
+db_config.yml
+
+# Ignore any dump files
+*.dump
+*.sql.gz
+
+# Ignore database backups
+backups/
+
 # Ignore specific files or directories (add more as needed)
 # your_specific_file_or_directory/
 .vercel
