@@ -14,9 +14,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Secret key to encode the JWT
-SECRET_KEY = config("SECRET_KEY")
-ALGORITHM = config("ALGORITHM")
-ACCESS_TOKEN_EXPIRE_MINUTES = int(config("ACCESS_TOKEN_EXPIRE_MINUTES"))
+SECRET_KEY = config("ryUMU2GT693WmUTPvScN6EnTbkkGlW2lzEUEAPXpXVI")
+ALGORITHM = config("HS256")
+ACCESS_TOKEN_EXPIRE_MINUTES = int(config("10"))
 
 # OAuth2 scheme
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
