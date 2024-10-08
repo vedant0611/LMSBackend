@@ -1,33 +1,33 @@
-from fastapi import APIRouter, Depends
-from fastapi.exceptions import HTTPException
-from pydantic import BaseModel
-import modules.member.controllers as member_controller 
+from fastapi import APIRouter, Depends, HTTPException
+import modules.member.controllers as member_controller
 from modules.auth.routes import get_current_user
 
 router = APIRouter()
 
-# For Borrow the books
 @router.post("/book/borrow/{book_id}")
-async def borrow_book(book_id:int, current_user: dict = Depends(get_current_user)):
+async def borrow_book(book_id: int, current_user: dict = Depends(get_current_user)):
+    current_user_id = current_user.get("user_id")
     try:
-        current_user_id = current_user.get("user_id")
-        return await member_controller.borrow_book(current_user_id,book_id)
+        result = await member_controller.borrow_book(current_user_id, book_id)
+        return result
     except Exception as e:
-        return HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
 
-# For Returned the books
+# For Return the books
 @router.post("/book/return/{book_id}")
-async def return_book(book_id:int, current_user: dict = Depends(get_current_user)):
+async def return_book(book_id: int, current_user: dict = Depends(get_current_user)):
     try:
-        return await member_controller.return_book(book_id)
+        result = await member_controller.return_book(book_id)
+        return result
     except Exception as e:
-        return HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
 
 # For Delete my own account
-@router.get("/delete-account")
+@router.delete("/delete-account")
 async def delete_account(current_user: dict = Depends(get_current_user)):
+    current_user_id = current_user.get("user_id")
     try:
-        current_user_id = current_user.get("user_id")
-        return await member_controller.delete_account(current_user_id)
+        result = await member_controller.delete_account(current_user_id)
+        return result
     except Exception as e:
-        return HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
